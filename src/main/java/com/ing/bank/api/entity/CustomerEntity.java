@@ -3,6 +3,7 @@ package com.ing.bank.api.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "customer")
@@ -13,6 +14,19 @@ public class CustomerEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
+    @Column(name = "name")
+    private String name;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "open_since")
+    private Date openSince;
+
+    @Column(name = "status")
+    private String status;
+
+    @Column(name = "bsn", unique = true)
+    private String bsn;
+
 
 
 }

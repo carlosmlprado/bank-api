@@ -2,10 +2,11 @@ package com.ing.bank.api.dto;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Data
-public class TransactionDTO {
+public class TransactionDTO implements Serializable {
 
     private Long id;
     private String transactionId;
