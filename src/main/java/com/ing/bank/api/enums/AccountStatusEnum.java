@@ -14,11 +14,11 @@ public enum AccountStatusEnum {
         this.description = description;
     }
 
-    public Integer getKey(Integer key) {
+    public Integer getKey() {
         return key;
     }
 
-    public String getDescription(String description) {
+    public String getDescription() {
         return description;
     }
 

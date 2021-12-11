@@ -20,7 +20,7 @@ public class TransactionEntity {
     private String originBank;
     @Column(name = "origin_account")
     private String originAccount;
-    @Column(name = "transaction_id")
+    @Column(name = "origin_name")
     private String originName;
     @Column(name = "destination_bank")
     private String destinationBank;

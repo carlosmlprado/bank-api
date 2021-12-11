@@ -7,7 +7,7 @@ import javax.persistence.*;
 @Entity
 @Data
 @Table(name = "rel_customer_transaction")
-public class UserTransactionEntity {
+public class CustomerTransactionEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

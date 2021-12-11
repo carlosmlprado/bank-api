@@ -2,9 +2,9 @@ package com.ing.bank.api.enums;
 
 public enum BanksEnum {
 
-    PRIVATE(1, "ING"),
-    JOINT_ACCOUNT(2, "ABN AMRO"),
-    BUSINESS(3, "RABOBANK");
+    ING(1, "ING"),
+    ABN_AMRO(2, "ABN AMRO"),
+    RABOBANK(3, "RABOBANK");
 
     private Integer key;
     private String description;
@@ -14,11 +14,11 @@ public enum BanksEnum {
         this.description = description;
     }
 
-    public Integer getKey(Integer key) {
+    public Integer getKey() {
         return key;
     }
 
-    public String getDescription(String description) {
+    public String getDescription() {
         return description;
     }
 }

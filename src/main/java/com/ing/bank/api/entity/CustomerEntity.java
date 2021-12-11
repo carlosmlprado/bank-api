@@ -1,13 +1,18 @@
 package com.ing.bank.api.entity;
 
-import lombok.Data;
+import com.ing.bank.api.dto.CustomerDTO;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.Calendar;
 import java.util.Date;
 
 @Entity
 @Table(name = "customer")
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class CustomerEntity {
 
     @Id
@@ -16,17 +21,19 @@ public class CustomerEntity {
     private Long id;
     @Column(name = "name")
     private String name;
+    @Column(name = "bsn", unique = true)
+    private String bsn;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "open_since")
     private Date openSince;
 
-    @Column(name = "status")
-    private String status;
+    public CustomerEntity toEntity(CustomerDTO customer) {
 
-    @Column(name = "bsn", unique = true)
-    private String bsn;
-
-
-
+        return CustomerEntity.builder().
+                id(customer.getId()).
+                name(customer.getName()).
+                openSince(Calendar.getInstance().getTime()).
+                bsn(customer.getBsn()).build();
+    }
 }
