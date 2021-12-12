@@ -1,12 +1,16 @@
 package com.ing.bank.api.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
 @Data
 @Table(name = "rel_customer_transaction")
+@AllArgsConstructor
+@NoArgsConstructor
 public class CustomerTransactionEntity {
 
     @Id

@@ -6,10 +6,11 @@ import com.ing.bank.api.entity.BankAccountEntity;
 import com.ing.bank.api.entity.CustomerEntity;
 import com.ing.bank.api.enums.AccountStatusEnum;
 import com.ing.bank.api.repository.BankAccountRepository;
-import com.ing.bank.api.service.AccountService;
+import com.ing.bank.api.service.BankAccountService;
 import com.ing.bank.api.service.CustomerService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,9 +18,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Random;
 
 @Slf4j
-@Service("accountService")
+@Service("BankAccountService")
 @AllArgsConstructor
-public class AccountServiceImpl implements AccountService {
+public class BankAccountServiceImpl implements BankAccountService {
 
     private BankAccountRepository bankAccountRepository;
     private CustomerService customerService;

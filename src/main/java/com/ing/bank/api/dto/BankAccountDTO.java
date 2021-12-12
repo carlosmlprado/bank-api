@@ -15,14 +15,11 @@ import java.util.List;
 
 @Data
 @Builder
-@NoArgsConstructor
-@AllArgsConstructor
 public class BankAccountDTO implements Serializable {
 
     private Long id;
     private String type;
 
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
     private Date openSince;
 
     private String status;
@@ -30,7 +27,7 @@ public class BankAccountDTO implements Serializable {
     private String bank;
     private List<CustomerDTO> owners;
 
-    public BankAccountDTO toDTO(BankAccountEntity bankAccountEntity, List<CustomerDTO> customers) {
+    public BankAccountDTO toDtoWithCustomers(BankAccountEntity bankAccountEntity, List<CustomerDTO> customers) {
         return BankAccountDTO.builder().
                 type(bankAccountEntity.getType()).
                 openSince(bankAccountEntity.getOpenedDate()).

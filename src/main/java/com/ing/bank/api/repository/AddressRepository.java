@@ -16,6 +16,6 @@ public interface AddressRepository extends JpaRepository<AddressEntity, Long> {
      * @param number
      * @return
      */
-    @Query(value = "SELECT * FROM address WHERE post_code = :postCode AND number = :number limit 1", nativeQuery = true)
-    AddressEntity verifyIfAddressExistsByPostCodeAndNumber(@Param("postCode") String postCode, @Param("number") String number);
+    @Query(value = "SELECT * FROM address WHERE post_code = :postCode AND number = :number AND customer_id = :customerId limit 1", nativeQuery = true)
+    AddressEntity verifyIfAddressExistsByPostCodeAndNumberAndCustomerId(@Param("postCode") String postCode, @Param("number") String number, @Param("customerId") Long customerId);
 }

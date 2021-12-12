@@ -10,9 +10,9 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-@Service("customerService")
-@AllArgsConstructor
 @Slf4j
+@Service
+@AllArgsConstructor
 public class CustomerServiceImpl implements CustomerService {
 
     private CustomerRepository customerRepository;
@@ -20,7 +20,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public CustomerDTO createCustomer(CustomerDTO customerDTO) {
-
+        var address = new AddressDTO();
         log.info("Creating new User. First checking if he/she already exists");
         var customerEntity = customerRepository.findCustomerByBsn(customerDTO.getBsn());
         log.debug("CustomerEntity: " + customerEntity);
@@ -33,17 +33,12 @@ public class CustomerServiceImpl implements CustomerService {
             log.info("Setting address to the customer");
         }
         log.info("Check address.");
-        var address = createAddress(customerEntity, customerDTO.getAddress());
+        address = addressService.createAddress(customerDTO.getAddress(), customerEntity);
 
         customerDTO.setId(customerEntity.getId());
         customerDTO.setAddress(address);
 
         return customerDTO;
     }
-
-    private AddressDTO createAddress(CustomerEntity customerEntity, AddressDTO addressDTO) {
-        return addressService.createAddress(addressDTO, customerEntity);
-    }
-
 
 }
