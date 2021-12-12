@@ -1,6 +1,7 @@
 package com.ing.bank.api.entity;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,6 +12,7 @@ import javax.persistence.*;
 @Table(name = "rel_customer_transaction")
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class CustomerTransactionEntity {
 
     @Id
@@ -28,5 +30,12 @@ public class CustomerTransactionEntity {
     @ManyToOne
     @JoinColumn(name = "transaction_id")
     private TransactionEntity transactionId;
+
+    public CustomerTransactionEntity toEntity(CustomerEntity customerFrom, CustomerEntity customerTo, TransactionEntity transactionEntity) {
+        return CustomerTransactionEntity.builder().
+                customerFromId(customerFrom).
+                customerToId(customerTo).
+                transactionId(transactionEntity).build();
+    }
 
 }

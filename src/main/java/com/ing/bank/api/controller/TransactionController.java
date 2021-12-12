@@ -1,8 +1,10 @@
 package com.ing.bank.api.controller;
 
-import com.ing.bank.api.dto.SpentAndReceivedMoneyResponseDTO;
-import com.ing.bank.api.dto.TransactionDTO;
+import com.ing.bank.api.dto.transaction.SpentAndReceivedMoneyResponseDTO;
+import com.ing.bank.api.dto.transaction.TransactionDTO;
+import com.ing.bank.api.service.TransactionService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,14 +13,19 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 public class TransactionController {
 
-    @PostMapping("/createTransaction")
-    public ResponseEntity<Void> createTransaction(@RequestBody TransactionDTO transactionDTO){
+    private TransactionService transactionService;
 
-        return null;
+    @PostMapping("/createTransaction")
+    public ResponseEntity<String> createTransaction(@RequestBody TransactionDTO transactionDTO) {
+        String resp = transactionService.createTransaction(transactionDTO);
+
+        if (resp.equals("error"))
+            return new ResponseEntity<String>("Error creating transaction", HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<String>(resp, HttpStatus.CREATED);
     }
 
     @GetMapping("/moneyReceivedAndSpentInTransactions/{customerId}")
-    public ResponseEntity<SpentAndReceivedMoneyResponseDTO> moneyReceivedAndSpentInTransactions(@PathVariable Long customerId){
+    public ResponseEntity<SpentAndReceivedMoneyResponseDTO> moneyReceivedAndSpentInTransactions(@PathVariable Long customerId) {
 
         return null;
     }

@@ -1,7 +1,7 @@
 package com.ing.bank.api.controller;
 
-import com.ing.bank.api.dto.BankAccountDTO;
-import com.ing.bank.api.dto.BankAccountResponseDTO;
+import com.ing.bank.api.dto.bankaccount.BankAccountDTO;
+import com.ing.bank.api.dto.bankaccount.BankAccountResponseDTO;
 import com.ing.bank.api.repository.BankAccountRepository;
 import com.ing.bank.api.service.BankAccountService;
 import lombok.AllArgsConstructor;

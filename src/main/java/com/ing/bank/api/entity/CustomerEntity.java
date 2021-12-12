@@ -1,6 +1,6 @@
 package com.ing.bank.api.entity;
 
-import com.ing.bank.api.dto.CustomerDTO;
+import com.ing.bank.api.dto.customer.CustomerDTO;
 import lombok.*;
 
 import javax.persistence.*;

@@ -1,4 +1,4 @@
-package com.ing.bank.api.dto;
+package com.ing.bank.api.dto.bankaccount;
 
 import com.ing.bank.api.entity.BankAccountEntity;
 import lombok.AllArgsConstructor;

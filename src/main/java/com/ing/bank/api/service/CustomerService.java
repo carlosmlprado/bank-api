@@ -1,6 +1,6 @@
 package com.ing.bank.api.service;
 
-import com.ing.bank.api.dto.CustomerDTO;
+import com.ing.bank.api.dto.customer.CustomerDTO;
 
 public interface CustomerService {
 

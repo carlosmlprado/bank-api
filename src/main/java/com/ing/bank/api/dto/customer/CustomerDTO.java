@@ -1,6 +1,7 @@
-package com.ing.bank.api.dto;
+package com.ing.bank.api.dto.customer;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.ing.bank.api.dto.address.AddressDTO;
 import com.ing.bank.api.entity.CustomerEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

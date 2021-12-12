@@ -1,13 +1,11 @@
 package com.ing.bank.api.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
-import com.ing.bank.api.dto.AddressDTO;
-import com.ing.bank.api.dto.BankAccountDTO;
-import com.ing.bank.api.dto.BankAccountResponseDTO;
-import com.ing.bank.api.dto.CustomerDTO;
-import com.ing.bank.api.entity.AddressEntity;
+import com.ing.bank.api.dto.address.AddressDTO;
+import com.ing.bank.api.dto.bankaccount.BankAccountDTO;
+import com.ing.bank.api.dto.bankaccount.BankAccountResponseDTO;
+import com.ing.bank.api.dto.customer.CustomerDTO;
 import com.ing.bank.api.entity.BankAccountEntity;
 import com.ing.bank.api.entity.CustomerEntity;
 import com.ing.bank.api.repository.BankAccountRepository;

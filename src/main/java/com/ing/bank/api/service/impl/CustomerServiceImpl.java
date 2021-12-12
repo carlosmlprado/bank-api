@@ -1,7 +1,7 @@
 package com.ing.bank.api.service.impl;
 
-import com.ing.bank.api.dto.AddressDTO;
-import com.ing.bank.api.dto.CustomerDTO;
+import com.ing.bank.api.dto.address.AddressDTO;
+import com.ing.bank.api.dto.customer.CustomerDTO;
 import com.ing.bank.api.entity.CustomerEntity;
 import com.ing.bank.api.repository.CustomerRepository;
 import com.ing.bank.api.service.AddressService;

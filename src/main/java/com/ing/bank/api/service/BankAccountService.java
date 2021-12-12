@@ -1,6 +1,6 @@
 package com.ing.bank.api.service;
 
-import com.ing.bank.api.dto.BankAccountDTO;
+import com.ing.bank.api.dto.bankaccount.BankAccountDTO;
 import org.springframework.http.HttpStatus;
 
 public interface BankAccountService {

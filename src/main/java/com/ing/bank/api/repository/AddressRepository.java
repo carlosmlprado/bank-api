@@ -1,6 +1,5 @@
 package com.ing.bank.api.repository;
 
-import com.ing.bank.api.dto.AddressDTO;
 import com.ing.bank.api.entity.AddressEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

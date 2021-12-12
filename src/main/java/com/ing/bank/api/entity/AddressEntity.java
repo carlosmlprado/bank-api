@@ -1,6 +1,6 @@
 package com.ing.bank.api.entity;
 
-import com.ing.bank.api.dto.AddressDTO;
+import com.ing.bank.api.dto.address.AddressDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

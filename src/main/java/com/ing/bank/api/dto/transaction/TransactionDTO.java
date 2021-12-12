@@ -1,4 +1,4 @@
-package com.ing.bank.api.dto;
+package com.ing.bank.api.dto.transaction;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Builder;

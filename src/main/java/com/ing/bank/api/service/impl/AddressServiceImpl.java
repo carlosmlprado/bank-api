@@ -1,15 +1,12 @@
 package com.ing.bank.api.service.impl;
 
-import com.ing.bank.api.dto.AddressDTO;
+import com.ing.bank.api.dto.address.AddressDTO;
 import com.ing.bank.api.entity.AddressEntity;
 import com.ing.bank.api.entity.CustomerEntity;
 import com.ing.bank.api.repository.AddressRepository;
 import com.ing.bank.api.service.AddressService;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

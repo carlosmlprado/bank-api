@@ -1,4 +1,4 @@
-package com.ing.bank.api.dto;
+package com.ing.bank.api.dto.transaction;
 
 import lombok.Data;
 

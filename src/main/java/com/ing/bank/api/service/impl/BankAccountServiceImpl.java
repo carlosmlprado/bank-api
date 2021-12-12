@@ -1,7 +1,7 @@
 package com.ing.bank.api.service.impl;
 
-import com.ing.bank.api.dto.BankAccountDTO;
-import com.ing.bank.api.dto.CustomerDTO;
+import com.ing.bank.api.dto.bankaccount.BankAccountDTO;
+import com.ing.bank.api.dto.customer.CustomerDTO;
 import com.ing.bank.api.entity.BankAccountEntity;
 import com.ing.bank.api.entity.CustomerEntity;
 import com.ing.bank.api.enums.AccountStatusEnum;
@@ -10,8 +10,6 @@ import com.ing.bank.api.service.BankAccountService;
 import com.ing.bank.api.service.CustomerService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -80,8 +78,6 @@ public class BankAccountServiceImpl implements BankAccountService {
             prefix += Integer.toString(n);
         }
         for (int i = 0; i < 16; i++) {
-            if (i % 4 == 0)
-                iban.append(" ");
             iban.append(prefix.charAt(i));
         }
         return iban.toString();
