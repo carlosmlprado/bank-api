@@ -11,6 +11,8 @@ import com.ing.bank.api.service.CustomerService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -51,6 +53,22 @@ public class BankAccountServiceImpl implements BankAccountService {
             return false;
         }
         return true;
+    }
+
+    @Override
+    @Transactional
+    public HttpStatus deleteBankAccountsByCustomerId(Long customerId) {
+
+        log.info("Verifying iof customer has account..");
+        Long counter = bankAccountRepository.countCustomerAccounts(customerId);
+        log.info("Customer has {} accounts", counter);
+        if (counter > 0) {
+            log.info("Deleting accounts from customer: {}", customerId);
+            bankAccountRepository.deleteBankAccountsByCustomerId(customerId);
+            return HttpStatus.NO_CONTENT;
+        } else {
+            return HttpStatus.NOT_FOUND;
+        }
     }
 
     private String generateIban(String prefix) {

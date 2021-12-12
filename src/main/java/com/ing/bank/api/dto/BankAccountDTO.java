@@ -15,9 +15,10 @@ import java.util.List;
 
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class BankAccountDTO implements Serializable {
 
-    private Long id;
     private String type;
 
     private Date openSince;

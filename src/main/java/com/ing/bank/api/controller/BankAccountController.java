@@ -1,6 +1,5 @@
 package com.ing.bank.api.controller;
 
-import com.ing.bank.api.converter.Converter;
 import com.ing.bank.api.dto.BankAccountDTO;
 import com.ing.bank.api.dto.BankAccountResponseDTO;
 import com.ing.bank.api.repository.BankAccountRepository;
@@ -22,7 +21,6 @@ public class BankAccountController {
 
     private BankAccountService bankAccountService;
     private BankAccountRepository bankAccountRepository;
-    private Converter converter;
 
     @PostMapping("/createAccount")
     public ResponseEntity<Void> createAccount(@RequestBody BankAccountDTO account) {
@@ -34,15 +32,14 @@ public class BankAccountController {
 
     @GetMapping("/listCustomerAccount/{customerId}")
     public ResponseEntity<List<BankAccountResponseDTO>> listCustomerAccounts(@NonNull @PathVariable Long customerId) {
-        List<BankAccountResponseDTO> list = bankAccountRepository.listCustomerAccounts(customerId).stream().map(converter::toDTO).collect(Collectors.toList());
+        var bankResponse = new BankAccountResponseDTO();
+        List<BankAccountResponseDTO> list = bankAccountRepository.listCustomerAccounts(customerId).stream().map(bankResponse::toDTO).collect(Collectors.toList());
         return ResponseEntity.ok(list);
     }
 
     @DeleteMapping("/deleteAccounts/{customerId}")
-    public ResponseEntity<?> deleteAccounts(@NonNull @PathVariable Long customerId) {
-
-        return null;
+    public ResponseEntity<Void> deleteBankAccountsByCustomerId(@NonNull @PathVariable Long customerId) {
+        HttpStatus status = bankAccountService.deleteBankAccountsByCustomerId(customerId);
+        return ResponseEntity.status(status).build();
     }
-
-
 }
