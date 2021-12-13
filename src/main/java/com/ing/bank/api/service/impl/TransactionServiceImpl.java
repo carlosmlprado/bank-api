@@ -1,5 +1,6 @@
 package com.ing.bank.api.service.impl;
 
+import com.ing.bank.api.dto.transaction.SentAndReceivedMoneyResponseDTO;
 import com.ing.bank.api.dto.transaction.TransactionDTO;
 import com.ing.bank.api.entity.CustomerTransactionEntity;
 import com.ing.bank.api.entity.TransactionEntity;
@@ -103,4 +104,22 @@ public class TransactionServiceImpl implements TransactionService {
 
         customerTransactionRepository.save(customerTransactionEntity);
     }
+
+    @Override
+    public SentAndReceivedMoneyResponseDTO getMoneyReceivedAndSpentInTransactionsByCustomerId(Long customerId) {
+        log.info("S");
+        String transactionIdsFrom = customerTransactionRepository.getTransactionIdsFromCustomerToId(customerId).toString().replace("[", "").replace("]", "");
+        String transactionIdsTo = customerTransactionRepository.getTransactionIdsFromCustomerToId(customerId).toString().replace("[", "").replace("]", "");
+
+        var receivedAmounts = transactionRepository.getAmountByTransactionId(transactionIdsFrom);
+        var sentAmounts = transactionRepository.getAmountByTransactionId(transactionIdsTo);
+
+        var totalReceivedAmount = receivedAmounts.stream().mapToInt(i -> i.intValue()).sum();
+        var totalSentAmount = sentAmounts.stream().mapToInt(i -> i.intValue()).sum();
+
+        SentAndReceivedMoneyResponseDTO spentAndReceivedMoneyResponseDTO = new SentAndReceivedMoneyResponseDTO(Float.valueOf(totalSentAmount), Float.valueOf(totalReceivedAmount));
+
+        return spentAndReceivedMoneyResponseDTO;
+    }
+
 }

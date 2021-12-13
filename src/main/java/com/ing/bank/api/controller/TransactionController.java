@@ -1,6 +1,6 @@
 package com.ing.bank.api.controller;
 
-import com.ing.bank.api.dto.transaction.SpentAndReceivedMoneyResponseDTO;
+import com.ing.bank.api.dto.transaction.SentAndReceivedMoneyResponseDTO;
 import com.ing.bank.api.dto.transaction.TransactionDTO;
 import com.ing.bank.api.service.TransactionService;
 import lombok.AllArgsConstructor;
@@ -24,9 +24,9 @@ public class TransactionController {
         return new ResponseEntity<String>(resp, HttpStatus.CREATED);
     }
 
-    @GetMapping("/moneyReceivedAndSpentInTransactions/{customerId}")
-    public ResponseEntity<SpentAndReceivedMoneyResponseDTO> moneyReceivedAndSpentInTransactions(@PathVariable Long customerId) {
-
-        return null;
+    @GetMapping("/moneyReceivedAndSentInTransactions/{customerId}")
+    public ResponseEntity<SentAndReceivedMoneyResponseDTO> moneyReceivedAndSpentInTransactions(@PathVariable Long customerId) {
+        SentAndReceivedMoneyResponseDTO receivedMoneyResponseDTO = transactionService.getMoneyReceivedAndSpentInTransactionsByCustomerId(customerId);
+        return ResponseEntity.ok(receivedMoneyResponseDTO);
     }
 }
