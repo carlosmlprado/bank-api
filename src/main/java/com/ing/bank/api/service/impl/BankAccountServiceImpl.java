@@ -4,7 +4,7 @@ import com.ing.bank.api.dto.bankaccount.BankAccountDTO;
 import com.ing.bank.api.dto.customer.CustomerDTO;
 import com.ing.bank.api.entity.BankAccountEntity;
 import com.ing.bank.api.entity.CustomerEntity;
-import com.ing.bank.api.enums.AccountStatusEnum;
+import com.ing.bank.api.enums.BankAccountStatusEnum;
 import com.ing.bank.api.enums.AccountTypeEnum;
 import com.ing.bank.api.repository.BankAccountRepository;
 import com.ing.bank.api.service.BankAccountService;
@@ -47,7 +47,7 @@ public class BankAccountServiceImpl implements BankAccountService {
 
                 log.info("Creating bankAccountEntity to persist.");
                 var bankAccountEntity = new BankAccountEntity();
-                bankAccountEntity = bankAccountEntity.toEntity(bankAccountDTO.getType(), customerEntity.toEntity(c), AccountStatusEnum.ACTIVE.getDescription(), generateIban("IN"));
+                bankAccountEntity = bankAccountEntity.toEntity(bankAccountDTO.getType(), customerEntity.toEntity(c), BankAccountStatusEnum.ACTIVE.getDescription(), generateIban("IN"));
 
                 log.debug("bankAccountEntity: " + bankAccountEntity);
                 bankAccountRepository.save(bankAccountEntity);

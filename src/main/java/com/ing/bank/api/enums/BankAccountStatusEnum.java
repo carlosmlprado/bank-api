@@ -1,6 +1,6 @@
 package com.ing.bank.api.enums;
 
-public enum AccountStatusEnum {
+public enum BankAccountStatusEnum {
 
     ACTIVE(1, "Active"),
     BLOCKED(2, "Blocked"),
@@ -9,7 +9,7 @@ public enum AccountStatusEnum {
     private Integer key;
     private String description;
 
-    private AccountStatusEnum(Integer key, String description) {
+    private BankAccountStatusEnum(Integer key, String description) {
         this.key = key;
         this.description = description;
     }

@@ -1,0 +1,36 @@
+
+INVALID
+{
+    "originBank": "ABN", 
+    "originAccount": "IN61585683661547",
+    "originName": "Pedro", 
+    "destinationBank": "ABN", 
+    "destinationAccount": "IN85897212042751", 
+    "destinationName": "Joaquim", 
+    "amount": 1500,
+    "transactionDate": "2020-10-10"
+}
+
+VALID 1 ING
+{
+    "originBank": "ING", 
+    "originAccount": "IN43775419638953",
+    "originName": "Pedro",
+    "destinationBank": "ABN",
+    "destinationAccount": "IN85897212042751",
+    "destinationName": "Joaquim",
+    "amount": 1500,
+    "transactionDate": "2020-10-10"
+}
+
+VALID 2 ING
+{
+    "originBank": "ING", 
+    "originAccount": "IN43775419638953",
+    "originName": "Pedro",
+    "destinationBank": "ING",
+    "destinationAccount": "IN72137585358416",
+    "destinationName": "Joaquim",
+    "amount": 1500,
+    "transactionDate": "2020-10-10"
+}

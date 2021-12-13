@@ -42,25 +42,29 @@ public class TransactionServiceImpl implements TransactionService {
         String originBank = transactionDTO.getOriginBank();
         String destinationBank = transactionDTO.getDestinationBank();
 
-
         log.info("Check if one of the customers has account in ING to be a VALID transaction.");
         String status = checkIfOneOfTheCustomersAreFromIng(originBank, destinationBank);
 
         try {
             if (status.equals(INVALID)) {
                 log.info("Creating new INVALID Transaction {} ", transactionDTO);
-                TransactionEntity transactionEntity = createTransactionEntityBasedOnStatus(transactionDTO, TransactionStatusEnum.INVALID.getDescription());
+                TransactionEntity transactionEntity = createTransactionEntityBasedOnStatus(transactionDTO, INVALID);
                 transactionRepository.save(transactionEntity);
                 return resp += status;
             }
 
-            var customerIdFrom = originBank.equals(ING) ?
-                    getUserIdFromBankAccountByIban(transactionDTO.getOriginAccount()) : 0;
+            log.info("Checking if customers have active accounts to create the transaction.");
+            var customerIdFrom = getUserIdFromBankAccountByIban(transactionDTO.getOriginAccount());
 
-            var customerIdTo = destinationBank.equals(ING) ?
-                    getUserIdFromBankAccountByIban(transactionDTO.getDestinationAccount()) : 0;
+            var customerIdTo = getUserIdFromBankAccountByIban(transactionDTO.getDestinationAccount());
 
-            TransactionEntity transactionEntity = createTransactionEntityBasedOnStatus(transactionDTO, TransactionStatusEnum.VALID.getDescription());
+            if (customerIdFrom == 0 && customerIdTo == 0) {
+                TransactionEntity transactionEntity = createTransactionEntityBasedOnStatus(transactionDTO, INVALID);
+                transactionRepository.save(transactionEntity);
+                return resp += status;
+            }
+
+            TransactionEntity transactionEntity = createTransactionEntityBasedOnStatus(transactionDTO, VALID);
             transactionRepository.save(transactionEntity);
 
             log.info("Transaction created... Now relating the users with the transaction.");
@@ -76,9 +80,9 @@ public class TransactionServiceImpl implements TransactionService {
 
     private Long getUserIdFromBankAccountByIban(String customerIban) {
         Long customerId = bankAccountRepository.getUserIdFromBankAccountByIban(customerIban.trim());
-        if (null == customerId) {
+        if (null == customerId)
             return 0L;
-        }
+
         return customerId;
     }
 
@@ -92,12 +96,10 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     private String checkIfOneOfTheCustomersAreFromIng(String originBank, String destinationBank) {
-        if (!originBank.equals(ING) &&
-                !destinationBank.equals(ING)) {
+        if (!originBank.equals(ING) && !destinationBank.equals(ING))
             return INVALID;
-        } else {
-            return VALID;
-        }
+
+        return VALID;
     }
 
     private void createNewRelationBetwenCustomersAndTransaction(Long customerIdFrom, Long customerIdTo, TransactionEntity transaction) {

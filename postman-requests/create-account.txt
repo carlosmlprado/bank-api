@@ -1,0 +1,152 @@
+Valid - 2 users and Joint-Account
+
+{
+   "type":"Joint-Account",
+   "owners":[
+      {
+         "name":"Carlos",
+         "customerSinceWhen":"2020-10-20",
+		 "bsn":"1234567",
+         "address":{
+            "street":"Westerstraat",
+            "number":"10",
+            "city":"Enschede",
+            "postCode":"7522AA"
+
+         }
+      },
+      {
+         "name":"Giovana",
+         "customerSinceWhen":"2020-10-20",
+		 "bsn":"123456",
+         "address":{
+            "street":"Westerstraat",
+            "number":"10",
+            "city":"Enschede",
+            "postCode":"7522AA"
+         }
+      }
+   ],
+   "openSince":"2020-10-20",
+   "status":"Active"
+}
+
+Valid - 1 user and Private
+{
+   "type":"Private",
+   "owners":[
+      {
+         "name":"Carlos",
+         "customerSinceWhen":"2020-10-20",
+		 "bsn":"1234567",
+         "address":{
+            "street":"Westerstraat",
+            "number":"10",
+            "city":"Enschede",
+            "postCode":"7522AA"
+
+         }
+      }
+   ],
+   "openSince":"2020-10-20",
+   "status":"Active"
+}
+
+Valid - 3 users and Business
+
+{
+   "type":"Business",
+   "owners":[
+      {
+         "name":"Carlos",
+         "customerSinceWhen":"2020-10-20",
+		 "bsn":"1234567",
+         "address":{
+            "street":"Westerstraat",
+            "number":"10",
+            "city":"Enschede",
+            "postCode":"7522AA"
+
+         }
+      },
+      {
+         "name":"Giovana",
+         "customerSinceWhen":"2020-10-20",
+		 "bsn":"123456",
+         "address":{
+            "street":"Westerstraat",
+            "number":"10",
+            "city":"Enschede",
+            "postCode":"7522AA"
+         }
+      },
+	  {
+         "name":"Marcos",
+         "customerSinceWhen":"2020-10-20",
+		 "bsn":"123456333",
+         "address":{
+            "street":"Westerstraat",
+            "number":"10",
+            "city":"Enschede",
+            "postCode":"7522AA"
+         }
+      }
+   ],
+   "openSince":"2020-10-20",
+   "status":"Active"
+}
+
+Invalid 1 User and Joint-Account
+
+ {
+   "type":"Joint-Account",
+   "owners":[
+      {
+         "name":"Carlos",
+         "customerSinceWhen":"2020-10-20",
+		 "bsn":"1234567",
+         "address":{
+            "street":"Westerstraat",
+            "number":"10",
+            "city":"Enschede",
+            "postCode":"7522AA"
+
+         }
+      }
+   ],
+   "openSince":"2020-10-20",
+   "status":"Active"
+}
+
+Invalid 2 Users and Private
+
+{
+   "type":"Private",
+   "owners":[
+      {
+         "name":"Carlos",
+         "customerSinceWhen":"2020-10-20",
+		 "bsn":"1234567",
+         "address":{
+            "street":"Westerstraat",
+            "number":"10",
+            "city":"Enschede",
+            "postCode":"7522AA"
+
+         }
+      },
+      {
+         "name":"Giovana",
+         "customerSinceWhen":"2020-10-20",
+		 "bsn":"123456",
+         "address":{
+            "street":"Westerstraat",
+            "number":"10",
+            "city":"Enschede",
+            "postCode":"7522AA"
+         }
+      }
+   ],
+   "openSince":"2020-10-20",
+   "status":"Active"
+}

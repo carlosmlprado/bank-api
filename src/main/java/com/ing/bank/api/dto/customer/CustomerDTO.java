@@ -1,6 +1,5 @@
 package com.ing.bank.api.dto.customer;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ing.bank.api.dto.address.AddressDTO;
 import com.ing.bank.api.entity.CustomerEntity;
 import lombok.AllArgsConstructor;
@@ -19,9 +18,7 @@ public class CustomerDTO implements Serializable {
 
     private Long id;
     private String name;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private Date customerSinceWhen;
-
     private AddressDTO address;
     private String bsn;
 

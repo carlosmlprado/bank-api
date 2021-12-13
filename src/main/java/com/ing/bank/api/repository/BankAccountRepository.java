@@ -17,11 +17,11 @@ public interface BankAccountRepository extends JpaRepository<BankAccountEntity, 
 
     @Modifying
     @Query(value = "delete from bank_account where customer_id = :customerId", nativeQuery = true)
-    void deleteBankAccountsByCustomerId(Long customerId);
+    void deleteBankAccountsByCustomerId(@Param("customerId")Long customerId);
 
     @Query(value = "SELECT count(id) from bank_account WHERE customer_id = :customerId", nativeQuery = true)
     Long countCustomerAccounts(@Param("customerId") Long customerId);
 
-    @Query(value = "SELECT customer_id from bank_account where iban = :customerIban", nativeQuery = true)
+    @Query(value = "SELECT customer_id from bank_account where iban = :customerIban AND status = 'Active'", nativeQuery = true)
     Long getUserIdFromBankAccountByIban(@Param("customerIban") String customerIban);
 }

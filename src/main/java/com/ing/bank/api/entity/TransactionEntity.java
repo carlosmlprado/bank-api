@@ -53,6 +53,5 @@ public class TransactionEntity {
                 amount(transactionDTO.getAmount()).
                 transactionDate(Calendar.getInstance().getTime()).
                 status(transactionDTO.getStatus()).build();
-
     }
 }

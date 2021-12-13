@@ -19,9 +19,7 @@ import java.util.List;
 public class BankAccountDTO implements Serializable {
 
     private String type;
-
     private Date openSince;
-
     private String status;
     private String iban;
     private String bank;

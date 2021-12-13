@@ -20,7 +20,6 @@ public class TransactionDTO implements Serializable {
     private String destinationAccount;
     private String destinationName;
     private Float amount;
-    @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
     private Date transactionDate;
     private String status;
 
