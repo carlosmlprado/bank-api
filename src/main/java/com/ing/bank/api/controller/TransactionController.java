@@ -27,6 +27,8 @@ public class TransactionController {
     @GetMapping("/moneyReceivedAndSentInTransactions/{customerId}")
     public ResponseEntity<SentAndReceivedMoneyResponseDTO> moneyReceivedAndSpentInTransactions(@PathVariable Long customerId) {
         SentAndReceivedMoneyResponseDTO receivedMoneyResponseDTO = transactionService.getMoneyReceivedAndSpentInTransactionsByCustomerId(customerId);
+        if(null == receivedMoneyResponseDTO || receivedMoneyResponseDTO.getCustomerName().isEmpty())
+            return ResponseEntity.notFound().build();
         return ResponseEntity.ok(receivedMoneyResponseDTO);
     }
 }

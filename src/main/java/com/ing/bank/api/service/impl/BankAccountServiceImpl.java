@@ -5,6 +5,7 @@ import com.ing.bank.api.dto.customer.CustomerDTO;
 import com.ing.bank.api.entity.BankAccountEntity;
 import com.ing.bank.api.entity.CustomerEntity;
 import com.ing.bank.api.enums.AccountStatusEnum;
+import com.ing.bank.api.enums.AccountTypeEnum;
 import com.ing.bank.api.repository.BankAccountRepository;
 import com.ing.bank.api.service.BankAccountService;
 import com.ing.bank.api.service.CustomerService;
@@ -27,11 +28,17 @@ public class BankAccountServiceImpl implements BankAccountService {
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
-    public Boolean createAccount(BankAccountDTO account) {
+    public String createAccount(BankAccountDTO bankAccountDTO) {
 
-        log.info("Begin of createAccount. First checking if customer exists. If not, it'll create a new one.");
+        log.info("Begin of creating account. Verify if the request is valid.");
+        var request = validRequestForCreatingAccount(bankAccountDTO);
+
+        if(!request.equals("ok"))
+            return request;
+
+        log.info("Checking if customer exists. If not, it'll create a new one.");
         try {
-            for (CustomerDTO c : account.getOwners()) {
+            for (CustomerDTO c : bankAccountDTO.getOwners()) {
                 log.info("It will create both customer and address.");
                 c = customerService.createCustomer(c);
 
@@ -40,25 +47,24 @@ public class BankAccountServiceImpl implements BankAccountService {
 
                 log.info("Creating bankAccountEntity to persist.");
                 var bankAccountEntity = new BankAccountEntity();
-                bankAccountEntity = bankAccountEntity.toEntity(account.getType(), customerEntity.toEntity(c), AccountStatusEnum.ACTIVE.getDescription(), generateIban("IN"));
+                bankAccountEntity = bankAccountEntity.toEntity(bankAccountDTO.getType(), customerEntity.toEntity(c), AccountStatusEnum.ACTIVE.getDescription(), generateIban("IN"));
 
                 log.debug("bankAccountEntity: " + bankAccountEntity);
                 bankAccountRepository.save(bankAccountEntity);
-
             }
         } catch (Exception e) {
             log.error("Error creating bank account for customers: " + e.getMessage());
-            return false;
+            return "error";
         }
-        return true;
+        return "Success creating account";
     }
 
     @Override
     @Transactional
     public HttpStatus deleteBankAccountsByCustomerId(Long customerId) {
 
-        log.info("Verifying iof customer has account..");
-        Long counter = bankAccountRepository.countCustomerAccounts(customerId);
+        log.info("Verifying if customer has account..");
+        var counter = bankAccountRepository.countCustomerAccounts(customerId);
         log.info("Customer has {} accounts", counter);
         if (counter > 0) {
             log.info("Deleting accounts from customer: {}", customerId);
@@ -83,4 +89,14 @@ public class BankAccountServiceImpl implements BankAccountService {
         return iban.toString();
     }
 
+    private String validRequestForCreatingAccount(BankAccountDTO bankAccountDTO) {
+        log.info("Applying rules to deal with create account request");
+        if (bankAccountDTO.getType().equals(AccountTypeEnum.PRIVATE.getDescription()) && bankAccountDTO.getOwners().size() != 1) {
+            return "We can only create Private Account for 1 different customer at time";
+        } else if (bankAccountDTO.getType().equals(AccountTypeEnum.JOINT_ACCOUNT.getDescription()) && bankAccountDTO.getOwners().size() != 2) {
+            return "We can only create Joint Accounts for 2 different customers at time";
+        } else {
+            return "ok";
+        }
+    }
 }

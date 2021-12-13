@@ -2,6 +2,7 @@ package com.ing.bank.api.service.impl;
 
 import com.ing.bank.api.dto.transaction.SentAndReceivedMoneyResponseDTO;
 import com.ing.bank.api.dto.transaction.TransactionDTO;
+import com.ing.bank.api.entity.CustomerEntity;
 import com.ing.bank.api.entity.CustomerTransactionEntity;
 import com.ing.bank.api.entity.TransactionEntity;
 import com.ing.bank.api.enums.BanksEnum;
@@ -16,6 +17,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 @Service("transactionService")
@@ -106,20 +110,44 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public SentAndReceivedMoneyResponseDTO getMoneyReceivedAndSpentInTransactionsByCustomerId(Long customerId) {
-        log.info("S");
-        String transactionIdsFrom = customerTransactionRepository.getTransactionIdsFromCustomerToId(customerId).toString().replace("[", "").replace("]", "");
-        String transactionIdsTo = customerTransactionRepository.getTransactionIdsFromCustomerToId(customerId).toString().replace("[", "").replace("]", "");
+        SentAndReceivedMoneyResponseDTO spentAndReceivedMoneyResponseDTO = new SentAndReceivedMoneyResponseDTO(0F, 0F, 0F, "");
 
-        var receivedAmounts = transactionRepository.getAmountByTransactionId(transactionIdsFrom);
-        var sentAmounts = transactionRepository.getAmountByTransactionId(transactionIdsTo);
+        log.info("Verifying if customer exists");
+        CustomerEntity customerEntity = customerRepository.findById(customerId).stream().findFirst().orElse(null);
+        if (null == customerEntity) {
+            log.info("Customer doesn't exist");
+            return spentAndReceivedMoneyResponseDTO;
+        }
+        log.info("Customer exists {}", customerEntity);
+        spentAndReceivedMoneyResponseDTO.setCustomerName(customerEntity.getName());
 
-        var totalReceivedAmount = receivedAmounts.stream().mapToInt(i -> i.intValue()).sum();
-        var totalSentAmount = sentAmounts.stream().mapToInt(i -> i.intValue()).sum();
+        log.info("Getting all transactionsId that customer sent and received money");
+        var transactionIdsTo = customerTransactionRepository.getTransactionIdsToCustomerId(customerId);
+        var transactionIdsFrom = customerTransactionRepository.getTransactionIdsFromCustomerId(customerId);
 
-        SentAndReceivedMoneyResponseDTO spentAndReceivedMoneyResponseDTO = new SentAndReceivedMoneyResponseDTO(Float.valueOf(totalSentAmount), Float.valueOf(totalReceivedAmount));
+        List<Float> receivedAmounts = new ArrayList<>();
+        List<Float> sentAmounts = new ArrayList<>();
+        Double totalReceivedAmount = 0.0;
+        Double totalSentAmount = 0.0;
+
+        if (!transactionIdsFrom.isEmpty()) {
+            log.info("Getting amounts that customer already sent of money");
+            sentAmounts = transactionRepository.getAmountByTransactionId(transactionIdsFrom, VALID);
+            totalSentAmount = sentAmounts.stream().mapToDouble(f -> f.doubleValue()).sum();
+            spentAndReceivedMoneyResponseDTO.setMoneySent(Float.valueOf(totalSentAmount.floatValue()));
+        }
+
+        if (!transactionIdsTo.isEmpty()) {
+            log.info("Getting amounts that customer already received of money");
+            receivedAmounts = transactionRepository.getAmountByTransactionId(transactionIdsTo, VALID);
+            totalReceivedAmount = receivedAmounts.stream().mapToDouble(f -> f.doubleValue()).sum();
+            spentAndReceivedMoneyResponseDTO.setMoneyReceived(Float.valueOf(totalReceivedAmount.floatValue()));
+        }
+
+        spentAndReceivedMoneyResponseDTO.setTotal(totalReceivedAmount.floatValue() - totalSentAmount.floatValue());
 
         return spentAndReceivedMoneyResponseDTO;
     }
-
 }

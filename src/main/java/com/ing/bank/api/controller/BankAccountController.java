@@ -23,11 +23,14 @@ public class BankAccountController {
     private BankAccountRepository bankAccountRepository;
 
     @PostMapping("/createAccount")
-    public ResponseEntity<Void> createAccount(@RequestBody BankAccountDTO account) {
-        Boolean resp = bankAccountService.createAccount(account);
-        if (resp)
-            return ResponseEntity.status(HttpStatus.CREATED).build();
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    public ResponseEntity<String> createAccount(@RequestBody BankAccountDTO account) {
+        String resp = bankAccountService.createAccount(account);
+        if(resp.equals("error")){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        } else if(!resp.equals("Success creating account")){
+            return new ResponseEntity<String>(resp, HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<String>(resp, HttpStatus.CREATED);
     }
 
     @GetMapping("/listCustomerAccount/{customerId}")

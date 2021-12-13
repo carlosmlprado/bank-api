@@ -12,8 +12,8 @@ import java.util.List;
 public interface CustomerTransactionRepository extends JpaRepository<CustomerTransactionEntity, Long> {
 
     @Query(value = "SELECT transaction_id from rel_customer_transaction where customer_from_id = :customerFromId", nativeQuery = true)
-    List<Long> getTransactionIdsFromCustomerFromId(@Param("customerFromId") Long customerFromId);
+    List<Long> getTransactionIdsFromCustomerId(@Param("customerFromId") Long customerFromId);
 
     @Query(value = "SELECT transaction_id from rel_customer_transaction where customer_to_id = :customerToId", nativeQuery = true)
-    List<Long> getTransactionIdsFromCustomerToId(@Param("customerToId") Long customerToId);
+    List<Long> getTransactionIdsToCustomerId(@Param("customerToId") Long customerToId);
 }

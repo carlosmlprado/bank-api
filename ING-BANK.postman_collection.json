@@ -1,0 +1,75 @@
+{
+	"info": {
+		"_postman_id": "04d3b1b8-692b-4f21-b404-681d7494145b",
+		"name": "ING-BANK",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create Account",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "Get Accounts By customerId",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "Delete accounts from customer",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "Create Transaction",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    transaction_id: number,\r\n    origin_bank: string, //use a simple list of banks such as ing, abn amro, rabobank,\r\n    origin_account: string, //follow the IBAN format\r\n    origin_name: string, //written form of the name of the account holder\r\n    destination_bank: string, //use a simple list of banks such as ing, abn amro, rabobank,\r\n    destination_account: string, //IBAN\r\n    destination_name: string, //written form of the name of the account holder\r\n    amount: float\r\n    \"transaction_date\": date\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/transation/createTransaction",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"transation",
+						"createTransaction"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Received and Sent money",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		}
+	]
+}

@@ -9,7 +9,7 @@ public interface BankAccountService {
      *
      * @param account
      */
-    Boolean createAccount(BankAccountDTO account);
+    String createAccount(BankAccountDTO account);
 
     /**
      *

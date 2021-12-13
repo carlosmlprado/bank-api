@@ -12,6 +12,6 @@ import java.util.List;
 @Repository
 public interface TransactionRepository extends JpaRepository<TransactionEntity, Long> {
 
-    @Query(value = "SELECT amount FROM transaction WHERE id in (:transactionIds)", nativeQuery = true)
-    List<Float> getAmountByTransactionId(@Param("transactionIds") String transactionIds);
+    @Query(value = "SELECT amount FROM transaction WHERE status = :status AND id in (:transactionIds)", nativeQuery = true)
+    List<Float> getAmountByTransactionId(@Param("transactionIds") List<Long> transactionIds, @Param("status") String status);
 }
