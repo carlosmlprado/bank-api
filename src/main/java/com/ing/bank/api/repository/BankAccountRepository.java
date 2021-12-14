@@ -24,4 +24,7 @@ public interface BankAccountRepository extends JpaRepository<BankAccountEntity, 
 
     @Query(value = "SELECT customer_id from bank_account where iban = :customerIban AND status = 'Active'", nativeQuery = true)
     Long getUserIdFromBankAccountByIban(@Param("customerIban") String customerIban);
+
+    @Query(value = "SELECT customer_id from bank_account where iban = :customerIban AND status = 'Active' AND type = :type AND bank = :bank", nativeQuery = true)
+    Long getUserIdFromBankAccountByIbanAndTypeAndBank(@Param("customerIban") String customerIban, @Param("type") String type, @Param("bank") String bank);
 }

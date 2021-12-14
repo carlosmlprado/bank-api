@@ -2,7 +2,7 @@ package com.ing.bank.api.controller;
 
 import com.ing.bank.api.dto.transaction.SentAndReceivedMoneyResponseDTO;
 import com.ing.bank.api.dto.transaction.TransactionDTO;
-import com.ing.bank.api.service.TransactionService;
+import com.ing.bank.api.service.impl.TransactionServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,9 +11,10 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("api/transaction")
 @AllArgsConstructor
+@CrossOrigin(origins = "http://localhost:4200")
 public class TransactionController {
 
-    private TransactionService transactionService;
+    private TransactionServiceImpl transactionService;
 
     @PostMapping("/createTransaction")
     public ResponseEntity<String> createTransaction(@RequestBody TransactionDTO transactionDTO) {

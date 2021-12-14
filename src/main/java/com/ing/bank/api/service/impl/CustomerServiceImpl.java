@@ -4,21 +4,20 @@ import com.ing.bank.api.dto.address.AddressDTO;
 import com.ing.bank.api.dto.customer.CustomerDTO;
 import com.ing.bank.api.entity.CustomerEntity;
 import com.ing.bank.api.repository.CustomerRepository;
-import com.ing.bank.api.service.AddressService;
-import com.ing.bank.api.service.CustomerService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
 @AllArgsConstructor
-public class CustomerServiceImpl implements CustomerService {
+public class CustomerServiceImpl {
 
     private CustomerRepository customerRepository;
-    private AddressService addressService;
+    private AddressServiceImpl addressService;
 
-    @Override
+    @Transactional
     public CustomerDTO createCustomer(CustomerDTO customerDTO) {
         var address = new AddressDTO();
         log.info("Creating new User. First checking if he/she already exists");
@@ -32,6 +31,8 @@ public class CustomerServiceImpl implements CustomerService {
 
             log.info("Setting address to the customer");
         }
+
+
         log.info("Check address.");
         address = addressService.createAddress(customerDTO.getAddress(), customerEntity);
 

@@ -3,7 +3,6 @@ package com.ing.bank.api.controller;
 import com.ing.bank.api.dto.bankaccount.BankAccountDTO;
 import com.ing.bank.api.dto.bankaccount.BankAccountResponseDTO;
 import com.ing.bank.api.repository.BankAccountRepository;
-import com.ing.bank.api.service.BankAccountService;
 import com.ing.bank.api.service.impl.BankAccountServiceImpl;
 import lombok.AllArgsConstructor;
 import lombok.NonNull;
@@ -18,6 +17,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("api/account")
 @AllArgsConstructor
+@CrossOrigin(origins = "http://localhost:4200")
 public class BankAccountController {
 
     private BankAccountServiceImpl bankAccountService;

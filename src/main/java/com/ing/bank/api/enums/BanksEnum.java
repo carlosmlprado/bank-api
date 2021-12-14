@@ -3,7 +3,7 @@ package com.ing.bank.api.enums;
 public enum BanksEnum {
 
     ING(1, "ING"),
-    ABN_AMRO(2, "ABN AMRO"),
+    ABN_AMRO(2, "ABN-AMRO"),
     RABOBANK(3, "RABOBANK");
 
     private Integer key;

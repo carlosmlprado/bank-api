@@ -11,7 +11,6 @@ import com.ing.bank.api.repository.BankAccountRepository;
 import com.ing.bank.api.repository.CustomerRepository;
 import com.ing.bank.api.repository.TransactionRepository;
 import com.ing.bank.api.repository.CustomerTransactionRepository;
-import com.ing.bank.api.service.TransactionService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -24,7 +23,7 @@ import java.util.List;
 @Slf4j
 @Service("transactionService")
 @AllArgsConstructor
-public class TransactionServiceImpl implements TransactionService {
+public class TransactionServiceImpl {
 
     private TransactionRepository transactionRepository;
     private CustomerTransactionRepository customerTransactionRepository;
@@ -35,7 +34,6 @@ public class TransactionServiceImpl implements TransactionService {
     private final String VALID = TransactionStatusEnum.VALID.getDescription();
     private final String ING = BanksEnum.ING.getDescription();
 
-    @Override
     @Transactional(propagation = Propagation.REQUIRED)
     public String createTransaction(TransactionDTO transactionDTO) {
         String resp = "Transaction created with status ";
@@ -111,7 +109,6 @@ public class TransactionServiceImpl implements TransactionService {
         customerTransactionRepository.save(customerTransactionEntity);
     }
 
-    @Override
     @Transactional(readOnly = true)
     public SentAndReceivedMoneyResponseDTO getMoneyReceivedAndSpentInTransactionsByCustomerId(Long customerId) {
         SentAndReceivedMoneyResponseDTO spentAndReceivedMoneyResponseDTO = new SentAndReceivedMoneyResponseDTO(0F, 0F, 0F, "");

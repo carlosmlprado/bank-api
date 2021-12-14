@@ -4,7 +4,6 @@ import com.ing.bank.api.dto.address.AddressDTO;
 import com.ing.bank.api.entity.AddressEntity;
 import com.ing.bank.api.entity.CustomerEntity;
 import com.ing.bank.api.repository.AddressRepository;
-import com.ing.bank.api.service.AddressService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -13,11 +12,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Slf4j
 @Service("addresService")
 @AllArgsConstructor
-public class AddressServiceImpl implements AddressService {
+public class AddressServiceImpl {
 
     AddressRepository addressRepository;
 
-    @Override
     @Transactional
     public AddressDTO createAddress(AddressDTO addressDTO, CustomerEntity customerEntity) {
         log.info("Searching address. If it's already persisted, returns it, otherwise, create a new one.");

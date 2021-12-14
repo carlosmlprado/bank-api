@@ -2,6 +2,7 @@ Valid - 2 users and Joint-Account
 
 {
    "type":"Joint-Account",
+   "bank":"ING",
    "owners":[
       {
          "name":"Carlos",
@@ -34,6 +35,7 @@ Valid - 2 users and Joint-Account
 Valid - 1 user and Private
 {
    "type":"Private",
+   "bank":"ING",
    "owners":[
       {
          "name":"Carlos",
@@ -56,6 +58,7 @@ Valid - 3 users and Business
 
 {
    "type":"Business",
+   "bank":"ING",
    "owners":[
       {
          "name":"Carlos",

@@ -4,11 +4,8 @@ import com.ing.bank.api.dto.bankaccount.BankAccountDTO;
 import com.ing.bank.api.dto.customer.CustomerDTO;
 import com.ing.bank.api.entity.BankAccountEntity;
 import com.ing.bank.api.entity.CustomerEntity;
-import com.ing.bank.api.enums.BankAccountStatusEnum;
 import com.ing.bank.api.enums.AccountTypeEnum;
 import com.ing.bank.api.repository.BankAccountRepository;
-import com.ing.bank.api.service.BankAccountService;
-import com.ing.bank.api.service.CustomerService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -21,16 +18,14 @@ import java.util.Random;
 @Slf4j
 @Service("BankAccountService")
 @AllArgsConstructor
-public class BankAccountServiceImpl implements BankAccountService {
+public class BankAccountServiceImpl {
 
     private BankAccountRepository bankAccountRepository;
-    private CustomerService customerService;
+    private CustomerServiceImpl customerService;
 
     private final String PRIVATE = AccountTypeEnum.PRIVATE.getDescription();
-    private final String JOINT_ACCOUNT = AccountTypeEnum.PRIVATE.getDescription();
+    private final String JOINT_ACCOUNT = AccountTypeEnum.JOINT_ACCOUNT.getDescription();
 
-
-    @Override
     @Transactional(propagation = Propagation.REQUIRED)
     public String createAccount(BankAccountDTO bankAccountDTO) {
 
@@ -43,6 +38,7 @@ public class BankAccountServiceImpl implements BankAccountService {
         log.info("Checking if customer exists. If not, it'll create a new one.");
         try {
             for (CustomerDTO c : bankAccountDTO.getOwners()) {
+
                 log.info("It will create both customer and address.");
                 c = customerService.createCustomer(c);
 
@@ -64,7 +60,6 @@ public class BankAccountServiceImpl implements BankAccountService {
         return "Success creating account";
     }
 
-    @Override
     @Transactional
     public HttpStatus deleteBankAccountsByCustomerId(Long customerId) {
 
