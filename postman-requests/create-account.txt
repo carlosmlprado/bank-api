@@ -103,6 +103,7 @@ Invalid 1 User and Joint-Account
 
  {
    "type":"Joint-Account",
+   "bank":"ING",
    "owners":[
       {
          "name":"Carlos",
@@ -125,6 +126,7 @@ Invalid 2 Users and Private
 
 {
    "type":"Private",
+   "bank":"ING",
    "owners":[
       {
          "name":"Carlos",

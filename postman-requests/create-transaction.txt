@@ -4,7 +4,7 @@ INVALID
     "originBank": "ABN", 
     "originAccount": "get from DB. Randomly generated",
     "originName": "Pedro", 
-    "destinationBank": "ABN", 
+    "destinationBank": "ABN-AMRO", 
     "destinationAccount": "get from DB. Randomly generated", 
     "destinationName": "Joaquim", 
     "amount": 1500,
@@ -16,7 +16,7 @@ VALID 1 ING
     "originBank": "ING", 
     "originAccount": "get from DB. Randomly generated",
     "originName": "Pedro",
-    "destinationBank": "ABN",
+    "destinationBank": "ABN-AMRO",
     "destinationAccount": "get from DB. Randomly generated",
     "destinationName": "Joaquim",
     "amount": 1500,
@@ -25,7 +25,7 @@ VALID 1 ING
 
 VALID 2 ING
 {
-    "originBank": "ING", 
+    "originBank": "RABOBANK", 
     "originAccount": "get from DB. Randomly generated",
     "originName": "Pedro",
     "destinationBank": "ING",
