@@ -48,8 +48,8 @@ class BankAccountControllerTest {
     @MockBean
     private BankAccountRepository bankAccountRepository;
 
-    @MockBean
-    private BankAccountService bankAccountService;
+    @Autowired
+    private ObjectMapper objectMapper;
 
     @Test
     void createAccount() {
@@ -57,17 +57,7 @@ class BankAccountControllerTest {
 
     @Test
     void whenCreatingNewAccountShouldReturnCreated() throws Exception {
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.configure(WRAP_ROOT_VALUE, false);
-        ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
-        String requestJson = ow.writeValueAsString(mockBankAccountDTO());
 
-        MockHttpServletRequestBuilder request = post(BASE_URL + "/createAccount")
-                .contentType(APPLICATION_JSON)
-                .content(requestJson);
-
-        mockMvc.perform(request)
-                .andExpect(status().is(HttpStatus.CREATED.value()));
 
     }
 
@@ -182,8 +172,8 @@ class BankAccountControllerTest {
                 openSince(Calendar.getInstance().getTime()).
                 owners(mockCustomersDTO()).
                 status("ACTIVE").
-                type("joint_account").build();
-
+                type("Joint-Account")
+                .build();
     }
 
 

@@ -4,6 +4,7 @@ import com.ing.bank.api.dto.bankaccount.BankAccountDTO;
 import com.ing.bank.api.dto.bankaccount.BankAccountResponseDTO;
 import com.ing.bank.api.repository.BankAccountRepository;
 import com.ing.bank.api.service.BankAccountService;
+import com.ing.bank.api.service.impl.BankAccountServiceImpl;
 import lombok.AllArgsConstructor;
 import lombok.NonNull;
 
@@ -19,12 +20,12 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class BankAccountController {
 
-    private BankAccountService bankAccountService;
+    private BankAccountServiceImpl bankAccountService;
     private BankAccountRepository bankAccountRepository;
 
     @PostMapping("/createAccount")
-    public ResponseEntity<String> createAccount(@RequestBody BankAccountDTO account) {
-        String resp = bankAccountService.createAccount(account);
+    public ResponseEntity<String> createAccount(@RequestBody BankAccountDTO accountDTO) {
+        String resp = bankAccountService.createAccount(accountDTO);
         if(resp.equals("error")){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         } else if(!resp.equals("Success creating account")){

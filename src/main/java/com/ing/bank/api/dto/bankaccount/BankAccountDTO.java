@@ -31,7 +31,7 @@ public class BankAccountDTO implements Serializable {
                 openSince(bankAccountEntity.getOpenedDate()).
                 iban(bankAccountEntity.getIban()).
                 status(bankAccountEntity.getStatus()).
-                bank(BanksEnum.ING.getDescription()).
+                bank(bankAccountEntity.getBank()).
                 owners(customers).
                 build();
     }

@@ -1,5 +1,7 @@
 package com.ing.bank.api.entity;
 
+import com.ing.bank.api.dto.bankaccount.BankAccountDTO;
+import com.ing.bank.api.enums.BankAccountStatusEnum;
 import com.ing.bank.api.enums.BanksEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -37,15 +39,15 @@ public class BankAccountEntity {
     @JoinColumn(name = "customer_id")
     private CustomerEntity customer;
 
-    public BankAccountEntity toEntity(String type, CustomerEntity customer, String status, String iban) {
+    public BankAccountEntity toEntity(BankAccountDTO bankAccountDTO, CustomerEntity customer) {
 
         return BankAccountEntity.builder().
-                type(type).
+                type(bankAccountDTO.getType()).
                 customer(customer).
                 openedDate(Calendar.getInstance().getTime()).
-                status(status).
-                iban(iban).
-                bank(BanksEnum.ING.getDescription()).build();
+                status(BankAccountStatusEnum.ACTIVE.getDescription()).
+                iban(bankAccountDTO.getIban()).
+                bank(bankAccountDTO.getBank()).build();
     }
 
 }

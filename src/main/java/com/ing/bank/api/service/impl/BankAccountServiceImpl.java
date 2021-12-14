@@ -26,6 +26,10 @@ public class BankAccountServiceImpl implements BankAccountService {
     private BankAccountRepository bankAccountRepository;
     private CustomerService customerService;
 
+    private final String PRIVATE = AccountTypeEnum.PRIVATE.getDescription();
+    private final String JOINT_ACCOUNT = AccountTypeEnum.PRIVATE.getDescription();
+
+
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
     public String createAccount(BankAccountDTO bankAccountDTO) {
@@ -33,7 +37,7 @@ public class BankAccountServiceImpl implements BankAccountService {
         log.info("Begin of creating account. Verify if the request is valid.");
         var request = validRequestForCreatingAccount(bankAccountDTO);
 
-        if(!request.equals("ok"))
+        if (!request.equals("ok"))
             return request;
 
         log.info("Checking if customer exists. If not, it'll create a new one.");
@@ -47,7 +51,8 @@ public class BankAccountServiceImpl implements BankAccountService {
 
                 log.info("Creating bankAccountEntity to persist.");
                 var bankAccountEntity = new BankAccountEntity();
-                bankAccountEntity = bankAccountEntity.toEntity(bankAccountDTO.getType(), customerEntity.toEntity(c), BankAccountStatusEnum.ACTIVE.getDescription(), generateIban("IN"));
+                bankAccountDTO.setIban(generateIban(bankAccountDTO.getBank().substring(0, 2)));
+                bankAccountEntity = bankAccountEntity.toEntity(bankAccountDTO, customerEntity.toEntity(c));
 
                 log.debug("bankAccountEntity: " + bankAccountEntity);
                 bankAccountRepository.save(bankAccountEntity);
@@ -91,9 +96,9 @@ public class BankAccountServiceImpl implements BankAccountService {
 
     private String validRequestForCreatingAccount(BankAccountDTO bankAccountDTO) {
         log.info("Applying rules to deal with create account request");
-        if (bankAccountDTO.getType().equals(AccountTypeEnum.PRIVATE.getDescription()) && bankAccountDTO.getOwners().size() != 1) {
+        if (bankAccountDTO.getType().equals(PRIVATE) && bankAccountDTO.getOwners().size() != 1) {
             return "We can only create Private Account for 1 different customer at time";
-        } else if (bankAccountDTO.getType().equals(AccountTypeEnum.JOINT_ACCOUNT.getDescription()) && bankAccountDTO.getOwners().size() != 2) {
+        } else if (bankAccountDTO.getType().equals(JOINT_ACCOUNT) && bankAccountDTO.getOwners().size() != 2) {
             return "We can only create Joint Accounts for 2 different customers at time";
         } else {
             return "ok";

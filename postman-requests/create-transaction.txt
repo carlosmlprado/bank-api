@@ -2,10 +2,10 @@
 INVALID
 {
     "originBank": "ABN", 
-    "originAccount": "IN61585683661547",
+    "originAccount": "get from DB. Randomly generated",
     "originName": "Pedro", 
     "destinationBank": "ABN", 
-    "destinationAccount": "IN85897212042751", 
+    "destinationAccount": "get from DB. Randomly generated", 
     "destinationName": "Joaquim", 
     "amount": 1500,
     "transactionDate": "2020-10-10"
@@ -14,10 +14,10 @@ INVALID
 VALID 1 ING
 {
     "originBank": "ING", 
-    "originAccount": "IN43775419638953",
+    "originAccount": "get from DB. Randomly generated",
     "originName": "Pedro",
     "destinationBank": "ABN",
-    "destinationAccount": "IN85897212042751",
+    "destinationAccount": "get from DB. Randomly generated",
     "destinationName": "Joaquim",
     "amount": 1500,
     "transactionDate": "2020-10-10"
@@ -26,11 +26,15 @@ VALID 1 ING
 VALID 2 ING
 {
     "originBank": "ING", 
-    "originAccount": "IN43775419638953",
+    "originAccount": "get from DB. Randomly generated",
     "originName": "Pedro",
     "destinationBank": "ING",
-    "destinationAccount": "IN72137585358416",
+    "destinationAccount": "get from DB. Randomly generated",
     "destinationName": "Joaquim",
     "amount": 1500,
     "transactionDate": "2020-10-10"
 }
+
+
+select * from bank_account b
+inner join customer c on b.customer_id = c.id
