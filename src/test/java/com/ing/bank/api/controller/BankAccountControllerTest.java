@@ -8,7 +8,7 @@ import com.ing.bank.api.dto.customer.CustomerDTO;
 import com.ing.bank.api.entity.BankAccountEntity;
 import com.ing.bank.api.entity.CustomerEntity;
 import com.ing.bank.api.repository.BankAccountRepository;
-import com.ing.bank.api.service.impl.BankAccountServiceImpl;
+import com.ing.bank.api.service.BankAccountServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

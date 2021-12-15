@@ -2,7 +2,7 @@ package com.ing.bank.api.controller;
 
 import com.ing.bank.api.dto.transaction.SentAndReceivedMoneyResponseDTO;
 import com.ing.bank.api.dto.transaction.TransactionDTO;
-import com.ing.bank.api.service.impl.TransactionServiceImpl;
+import com.ing.bank.api.service.TransactionServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ing.bank.api.dto.transaction.SentAndReceivedMoneyResponseDTO;
 import com.ing.bank.api.dto.transaction.TransactionDTO;
 import com.ing.bank.api.repository.CustomerRepository;
-import com.ing.bank.api.service.impl.TransactionServiceImpl;
+import com.ing.bank.api.service.TransactionServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

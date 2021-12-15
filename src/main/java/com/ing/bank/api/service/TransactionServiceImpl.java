@@ -1,4 +1,4 @@
-package com.ing.bank.api.service.impl;
+package com.ing.bank.api.service;
 
 import com.ing.bank.api.dto.transaction.SentAndReceivedMoneyResponseDTO;
 import com.ing.bank.api.dto.transaction.TransactionDTO;
